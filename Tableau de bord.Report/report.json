@@ -27,7 +27,7 @@
       "name": "3abf9af2340bb507a427",
       "visualContainers": [
         {
-          "config": "{\"name\":\"25e1f23c86a50d070b70\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.78266061619298,\"y\":0,\"z\":0,\"width\":684.7862431335085,\"height\":139.40291378074994,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"BONJOUR\",\"textStyle\":{\"fontSize\":\"80pt\"}}]}]}}]}}}",
+          "config": "{\"name\":\"25e1f23c86a50d070b70\",\"layouts\":[{\"id\":0,\"position\":{\"x\":9.78266061619298,\"y\":0,\"z\":0,\"width\":684.7862431335085,\"height\":139.40291378074994,\"tabOrder\":0}}],\"singleVisual\":{\"visualType\":\"textbox\",\"drillFilterOtherVisuals\":true,\"objects\":{\"general\":[{\"properties\":{\"paragraphs\":[{\"textRuns\":[{\"value\":\"BONJOUR Innocent\",\"textStyle\":{\"fontSize\":\"80pt\"}}]}]}}]}}}",
           "filters": "[]",
           "height": 139.40,
           "width": 684.79,
