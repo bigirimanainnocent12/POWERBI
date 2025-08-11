@@ -1,0 +1,11 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/fabric/gitIntegration/platformProperties/2.0.0/schema.json",
+  "metadata": {
+    "type": "SemanticModel",
+    "displayName": "Tableau de bord"
+  },
+  "config": {
+    "version": "2.0",
+    "logicalId": "2a5a1224-7008-49f2-831d-ae33cc36091f"
+  }
+}
