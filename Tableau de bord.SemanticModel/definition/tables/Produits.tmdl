@@ -1,0 +1,95 @@
+table Produits
+	lineageTag: 8e9b1233-55f1-4e93-9966-8e5142d8a350
+
+	column Marque
+		dataType: string
+		lineageTag: c2e804dd-1847-41cd-b058-3554e87a32a6
+		summarizeBy: none
+		sourceColumn: Marque
+
+		annotation SummarizationSetBy = Automatic
+
+	column Class
+		dataType: string
+		lineageTag: fc12858a-1fa3-460b-8c46-b6d7c8ba062f
+		summarizeBy: none
+		sourceColumn: Class
+
+		annotation SummarizationSetBy = Automatic
+
+	column Fabricant
+		dataType: string
+		lineageTag: 68d81cac-f9f3-4f9f-94e8-1e4267171514
+		summarizeBy: none
+		sourceColumn: Fabricant
+
+		annotation SummarizationSetBy = Automatic
+
+	column Description
+		dataType: string
+		lineageTag: 4ca1bd30-c181-474c-ad84-13edc071999b
+		summarizeBy: none
+		sourceColumn: Description
+
+		annotation SummarizationSetBy = Automatic
+
+	column Produit
+		dataType: string
+		lineageTag: f624f7ef-8542-41e1-bef4-415542724fe6
+		summarizeBy: none
+		sourceColumn: Produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Coût unitaire'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: e60eb1cb-2e45-40dd-aa47-bcf0108a24f6
+		summarizeBy: sum
+		sourceColumn: Coût unitaire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column 'Prix unitaire'
+		dataType: decimal
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 8c49e0a0-ebef-4fac-a75b-67aaf19170a6
+		summarizeBy: sum
+		sourceColumn: Prix unitaire
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column IdProduit
+		dataType: string
+		lineageTag: c44a4bc5-d84e-4a1d-be51-31469dc29f10
+		summarizeBy: none
+		sourceColumn: IdProduit
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdSousCategorieProduit
+		dataType: string
+		lineageTag: 402faae2-0f92-4195-af8b-9a101aa8896a
+		summarizeBy: none
+		sourceColumn: IdSousCategorieProduit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Produits = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Utilisateur\Desktop\Power Bi DESTOP\POWERBI\dataset\dataset\Produits.csv"),[Delimiter=",", Columns=9, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Coût unitaire", Currency.Type}, {"Prix unitaire", Currency.Type}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

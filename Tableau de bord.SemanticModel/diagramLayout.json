@@ -7,7 +7,86 @@
         "x": 0,
         "y": 0
       },
-      "nodes": [],
+      "nodes": [
+        {
+          "location": {
+            "x": 334.16101049476629,
+            "y": 153.70054137311104
+          },
+          "nodeIndex": "Boutiques",
+          "nodeLineageTag": "2869e9a2-dc35-4e86-987b-bf87f59cb4d6",
+          "size": {
+            "height": 272,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1188.3948754098374,
+            "y": 990.24275706693152
+          },
+          "nodeIndex": "Categorie Produits",
+          "nodeLineageTag": "b3b3f54c-8ff2-4979-88d1-af3e54ebddbf",
+          "size": {
+            "height": 128,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 50,
+            "y": -50
+          },
+          "nodeIndex": "Geographie",
+          "nodeLineageTag": "d8db94d5-3c05-4fcb-bb10-43347c2dfda4",
+          "size": {
+            "height": 176,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 902.542472870558,
+            "y": 641.30903432579976
+          },
+          "nodeIndex": "Produits",
+          "nodeLineageTag": "8e9b1233-55f1-4e93-9966-8e5142d8a350",
+          "size": {
+            "height": 296,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 618.3412081545373,
+            "y": 428.48629798804188
+          },
+          "nodeIndex": "Sales",
+          "nodeLineageTag": "4e500030-c09e-47cb-9a79-895bf4f8836e",
+          "size": {
+            "height": 224,
+            "width": 234
+          },
+          "zIndex": 0
+        },
+        {
+          "location": {
+            "x": 1226.2888671255091,
+            "y": 788.18472432487056
+          },
+          "nodeIndex": "Sous Categories Produits",
+          "nodeLineageTag": "9c589185-7dcd-451d-b14e-364a7472a87c",
+          "size": {
+            "height": 152,
+            "width": 234
+          },
+          "zIndex": 0
+        }
+      ],
       "name": "Toutes les tables",
       "zoomValue": 100,
       "pinKeyFieldsToTop": false,

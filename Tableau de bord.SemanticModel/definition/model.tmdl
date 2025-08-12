@@ -1,9 +1,35 @@
 model Model
 	culture: fr-FR
+	defaultPowerBIDataSourceVersion: powerBI_V3
+	sourceQueryCulture: en-US
+	dataAccessOptions
+		legacyRedirects
+		returnErrorValuesAsNull
+
+queryGroup 'Transformer le fichier à partir de Sales'
+
+	annotation PBI_QueryGroupOrder = 0
+
+queryGroup 'Transformer le fichier à partir de Sales\Requêtes d''assistance'
+
+	annotation PBI_QueryGroupOrder = 0
 
 annotation PBI_ProTooling = ["DevMode"]
 
-annotation PBIDesktopVersion = 2.145.1602.0 (25.07)+10647c9fa319b5e39936cdb21328038c371d1fe4
+annotation PBIDesktopVersion = 2.143.1378.0 (25.05)+4e1de9c957866bc5336e0d250838314aa54ff3a8
+
+annotation __PBI_TimeIntelligenceEnabled = 1
+
+annotation PBI_QueryOrder = ["Boutiques","Categorie Produits","Geographie","Produits","Sous Categories Produits","Sales","Exemple de fichier","Paramètre1","Transformer l'exemple de fichier","Transformer le fichier"]
+
+ref table Boutiques
+ref table 'Categorie Produits'
+ref table Geographie
+ref table Produits
+ref table 'Sous Categories Produits'
+ref table Sales
+ref table DateTableTemplate_10361e6f-bdf1-4d95-a4b3-62772575bf71
+ref table LocalDateTable_ef1df1d5-8d3e-48d7-a662-0db8c3cd7637
 
 ref cultureInfo fr-FR
 

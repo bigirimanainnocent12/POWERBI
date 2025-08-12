@@ -1,0 +1,43 @@
+expression 'Exemple de fichier' =
+		let
+		    Source = Folder.Files("C:\Users\Utilisateur\Desktop\Power Bi DESTOP\POWERBI\dataset\dataset\Sales"),
+		    Navigation1 = Source{0}[Content]
+		in
+		    Navigation1
+	lineageTag: 00c11f3b-6b86-41ea-bbe3-a038dc499a43
+	queryGroup: 'Transformer le fichier à partir de Sales\Requêtes d''assistance'
+
+	annotation PBI_ResultType = Binary
+
+expression Paramètre1 = #"Exemple de fichier" meta [IsParameterQuery=true, BinaryIdentifier=#"Exemple de fichier", Type="Binary", IsParameterQueryRequired=true]
+	lineageTag: 4f312ca3-1542-49eb-980b-49777e04879d
+	queryGroup: 'Transformer le fichier à partir de Sales\Requêtes d''assistance'
+
+	annotation PBI_ResultType = Binary
+
+expression 'Transformer l''exemple de fichier' =
+		let
+		    Source = Csv.Document(Paramètre1,[Delimiter=",", Columns=14, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    #"En-têtes promus"
+	lineageTag: 24d138c3-cb6a-4339-ba4e-1810300742c0
+	queryGroup: 'Transformer le fichier à partir de Sales'
+
+	annotation PBI_ResultType = Table
+
+expression 'Transformer le fichier' =
+		let
+		    Source = (Paramètre1) => let
+		        Source = Csv.Document(Paramètre1,[Delimiter=",", Columns=14, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		        #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		    in
+		        #"En-têtes promus"
+		in
+		    Source
+	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""Transformer l\u0027exemple de fichier""}" ]
+	lineageTag: 5bdf6f9e-b545-4db1-b2a0-329dd6048da2
+	queryGroup: 'Transformer le fichier à partir de Sales\Requêtes d''assistance'
+
+	annotation PBI_ResultType = Function
+

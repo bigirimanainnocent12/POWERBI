@@ -1,0 +1,84 @@
+table Boutiques
+	lineageTag: 2869e9a2-dc35-4e86-987b-bf87f59cb4d6
+
+	column IdBoutique
+		dataType: string
+		lineageTag: 89f8e428-03a5-489b-b254-592469bc25c0
+		summarizeBy: none
+		sourceColumn: IdBoutique
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdGeographie
+		dataType: string
+		lineageTag: 55e0725f-b522-4fa1-bf26-60ac27462b37
+		summarizeBy: none
+		sourceColumn: IdGeographie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Boutique
+		dataType: string
+		lineageTag: 80af1269-2c4d-410c-8a2b-bada9c2e4881
+		summarizeBy: none
+		sourceColumn: Boutique
+
+		annotation SummarizationSetBy = Automatic
+
+	column Status
+		dataType: string
+		lineageTag: 553ad0e3-931f-4ffa-a83c-a8020e6d793f
+		summarizeBy: none
+		sourceColumn: Status
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: f7f11af3-611e-468e-9e67-018b93e13d13
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Surface
+		dataType: int64
+		formatString: 0
+		lineageTag: 7104a841-fa20-4e4c-8a86-3cd5ae58d0f6
+		summarizeBy: sum
+		sourceColumn: Surface
+
+		annotation SummarizationSetBy = Automatic
+
+	column Employee
+		dataType: int64
+		formatString: 0
+		lineageTag: 901d07ae-84c3-4380-a704-417233b47e60
+		summarizeBy: sum
+		sourceColumn: Employee
+
+		annotation SummarizationSetBy = Automatic
+
+	column CloseReason
+		dataType: string
+		lineageTag: 900034b9-405a-45dd-942f-8f6690fd5567
+		summarizeBy: none
+		sourceColumn: CloseReason
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Boutiques = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Utilisateur\Desktop\Power Bi DESTOP\POWERBI\dataset\dataset\Boutiques.csv"),[Delimiter=",", Columns=8, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"IdBoutique", type text}, {"IdGeographie", type text}, {"Boutique", type text}, {"Status", type text}, {"Type", type text}, {"Surface", Int64.Type}, {"Employee", Int64.Type}, {"CloseReason", type text}}),
+				    #"Valeur remplacée" = Table.ReplaceValue(#"Type modifié","","Open",Replacer.ReplaceValue,{"CloseReason"})
+				in
+				    #"Valeur remplacée"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

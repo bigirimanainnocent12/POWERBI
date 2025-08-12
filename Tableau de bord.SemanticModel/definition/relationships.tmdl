@@ -1,0 +1,25 @@
+relationship 2a55eae8-8f51-4b7f-bb85-4f5d5b2675ae
+	joinOnDateBehavior: datePartOnly
+	fromColumn: Sales.IdDate
+	toColumn: LocalDateTable_ef1df1d5-8d3e-48d7-a662-0db8c3cd7637.Date
+
+relationship AutoDetected_2dd6f834-fa5d-4891-b9ef-5fc2e05f5049
+	fromColumn: Sales.IdBoutique
+	toColumn: Boutiques.IdBoutique
+
+relationship AutoDetected_3b33f310-f913-4f03-b47a-0f1a7a313d9d
+	fromColumn: Boutiques.IdGeographie
+	toColumn: Geographie.IdGeographie
+
+relationship AutoDetected_af68460e-d328-4db0-bbf0-fc5966ed908b
+	fromColumn: 'Sous Categories Produits'.IdCategorieProduit
+	toColumn: 'Categorie Produits'.IdCategorieProduit
+
+relationship AutoDetected_29edf56d-7cd8-44e9-9355-d96ead9dc6e4
+	fromColumn: Sales.IdProduit
+	toColumn: Produits.IdProduit
+
+relationship AutoDetected_e0455a5a-775e-489a-9735-d2c81f29d9ae
+	fromColumn: Produits.IdSousCategorieProduit
+	toColumn: 'Sous Categories Produits'.IdSousCategorieProduit
+

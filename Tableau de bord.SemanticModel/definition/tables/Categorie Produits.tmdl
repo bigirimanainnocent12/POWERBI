@@ -1,0 +1,33 @@
+table 'Categorie Produits'
+	lineageTag: b3b3f54c-8ff2-4979-88d1-af3e54ebddbf
+
+	column IdCategorieProduit
+		dataType: string
+		lineageTag: 0a7a7c70-d2a4-4704-bc46-da3e6096932d
+		summarizeBy: none
+		sourceColumn: IdCategorieProduit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Categorie Produit'
+		dataType: string
+		lineageTag: 744b2bd5-36f3-4f11-b623-e77a0334504c
+		summarizeBy: none
+		sourceColumn: Categorie Produit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Categorie Produits' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Utilisateur\Desktop\Power Bi DESTOP\POWERBI\dataset\dataset\Categorie Produits.csv"),[Delimiter=";", Columns=2, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"IdCategorieProduit", type text}, {"Categorie Produit", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

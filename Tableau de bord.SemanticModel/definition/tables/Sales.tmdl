@@ -1,0 +1,80 @@
+table Sales
+	lineageTag: 4e500030-c09e-47cb-9a79-895bf4f8836e
+
+	column IdDate
+		dataType: dateTime
+		formatString: General Date
+		lineageTag: 2aba3735-cb63-43fa-a3c5-c88249e1f752
+		summarizeBy: none
+		sourceColumn: IdDate
+
+		variation Variation
+			isDefault
+			relationship: 2a55eae8-8f51-4b7f-bb85-4f5d5b2675ae
+			defaultHierarchy: LocalDateTable_ef1df1d5-8d3e-48d7-a662-0db8c3cd7637.'Hiérarchie de dates'
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdVente
+		dataType: string
+		lineageTag: f2936bbd-bdf9-43c5-b81d-07acf0511a0e
+		summarizeBy: none
+		sourceColumn: IdVente
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdBoutique
+		dataType: string
+		lineageTag: db3f1d5f-82a1-4eff-afa8-30c570ddbffe
+		summarizeBy: none
+		sourceColumn: IdBoutique
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdProduit
+		dataType: string
+		lineageTag: f6e8c0c4-9351-496a-9b6d-2f3d7c268337
+		summarizeBy: none
+		sourceColumn: IdProduit
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quantité de retour'
+		dataType: int64
+		formatString: 0
+		lineageTag: a417a491-cbec-4081-adab-e7c2a908cf8d
+		summarizeBy: sum
+		sourceColumn: Quantité de retour
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Quantité de vente'
+		dataType: int64
+		formatString: 0
+		lineageTag: fde353b8-b7d4-4084-872e-29c50f953f9f
+		summarizeBy: sum
+		sourceColumn: Quantité de vente
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Sales = m
+		mode: import
+		source =
+				let
+				    Source = Folder.Files("C:\Users\Utilisateur\Desktop\Power Bi DESTOP\POWERBI\dataset\dataset\Sales"),
+				    #"Fichiers masqués filtrés1" = Table.SelectRows(Source, each [Attributes]?[Hidden]? <> true),
+				    #"Appeler une fonction personnalisée1" = Table.AddColumn(#"Fichiers masqués filtrés1", "Transformer le fichier", each #"Transformer le fichier"([Content])),
+				    #"Colonnes renommées1" = Table.RenameColumns(#"Appeler une fonction personnalisée1", {"Name", "Source.Name"}),
+				    #"Autres colonnes supprimées1" = Table.SelectColumns(#"Colonnes renommées1", {"Source.Name", "Transformer le fichier"}),
+				    #"Colonne de tables développée1" = Table.ExpandTableColumn(#"Autres colonnes supprimées1", "Transformer le fichier", Table.ColumnNames(#"Transformer le fichier"(#"Exemple de fichier"))),
+				    #"Type modifié" = Table.TransformColumnTypes(#"Colonne de tables développée1",{{"Source.Name", type text}, {"IdDate", type datetime}, {"IdVente", Int64.Type}, {"IdBoutique", Int64.Type}, {"IdProduit", Int64.Type}, {"IdPromotion", Int64.Type}, {"Montant du retour", type text}, {"Quantité de retour", Int64.Type}, {"Montant des ventes", type text}, {"Quantité de vente", Int64.Type}, {"Coût total", type text}, {"Coût unitaire", type text}, {"Prix unitaire", type text}, {"Montant de la remise", type text}, {"Quantité de remise", Int64.Type}}),
+				    #"Colonnes supprimées" = Table.RemoveColumns(#"Type modifié",{"Source.Name"}),
+				    #"Type modifié1" = Table.TransformColumnTypes(#"Colonnes supprimées",{{"IdVente", type text}, {"IdBoutique", type text}, {"IdProduit", type text}, {"IdPromotion", type text}}),
+				    #"Colonnes supprimées1" = Table.RemoveColumns(#"Type modifié1",{"IdPromotion", "Montant du retour", "Montant des ventes", "Coût total", "Coût unitaire", "Prix unitaire", "Montant de la remise", "Quantité de remise"})
+				in
+				    #"Colonnes supprimées1"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

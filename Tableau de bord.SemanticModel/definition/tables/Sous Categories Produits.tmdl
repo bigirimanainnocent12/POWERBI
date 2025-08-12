@@ -1,0 +1,41 @@
+table 'Sous Categories Produits'
+	lineageTag: 9c589185-7dcd-451d-b14e-364a7472a87c
+
+	column 'Sous Categorie Produit'
+		dataType: string
+		lineageTag: 6fefa176-6eeb-40ed-8ce9-88ff2e8acf88
+		summarizeBy: none
+		sourceColumn: Sous Categorie Produit
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdSousCategorieProduit
+		dataType: string
+		lineageTag: ef10dba7-03ae-4dae-948b-57bcdccc2239
+		summarizeBy: none
+		sourceColumn: IdSousCategorieProduit
+
+		annotation SummarizationSetBy = Automatic
+
+	column IdCategorieProduit
+		dataType: string
+		lineageTag: 08683db0-534f-43dc-86df-f0532f1e409c
+		summarizeBy: none
+		sourceColumn: IdCategorieProduit
+
+		annotation SummarizationSetBy = Automatic
+
+	partition 'Sous Categories Produits' = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Utilisateur\Desktop\Power Bi DESTOP\POWERBI\dataset\dataset\Sous Categories Produits.csv"),[Delimiter=",", Columns=3, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"Sous Categorie Produit", type text}, {"IdSousCategorieProduit", type text}, {"IdCategorieProduit", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+

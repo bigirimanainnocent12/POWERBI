@@ -1,0 +1,49 @@
+table Geographie
+	lineageTag: d8db94d5-3c05-4fcb-bb10-43347c2dfda4
+
+	column IdGeographie
+		dataType: string
+		lineageTag: 362bf1db-edea-45bd-899c-574073e4a054
+		summarizeBy: none
+		sourceColumn: IdGeographie
+
+		annotation SummarizationSetBy = Automatic
+
+	column Continent
+		dataType: string
+		lineageTag: 6f073549-bbd1-4180-81ec-1771a1a1eb4e
+		summarizeBy: none
+		sourceColumn: Continent
+
+		annotation SummarizationSetBy = Automatic
+
+	column Type
+		dataType: string
+		lineageTag: a69a0e0e-a552-48d8-b470-d49987b3c8fe
+		summarizeBy: none
+		sourceColumn: Type
+
+		annotation SummarizationSetBy = Automatic
+
+	column Pays
+		dataType: string
+		lineageTag: 12f90d0c-9174-4841-af8e-64ce372fd0da
+		summarizeBy: none
+		sourceColumn: Pays
+
+		annotation SummarizationSetBy = Automatic
+
+	partition Geographie = m
+		mode: import
+		source =
+				let
+				    Source = Csv.Document(File.Contents("C:\Users\Utilisateur\Desktop\Power Bi DESTOP\POWERBI\dataset\dataset\Geographie.csv"),[Delimiter=",", Columns=4, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+				    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+				    #"Type modifié" = Table.TransformColumnTypes(#"En-têtes promus",{{"IdGeographie", type text}, {"Continent", type text}, {"Type", type text}, {"Pays", type text}})
+				in
+				    #"Type modifié"
+
+	annotation PBI_NavigationStepName = Navigation
+
+	annotation PBI_ResultType = Table
+
