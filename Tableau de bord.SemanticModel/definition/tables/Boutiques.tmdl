@@ -8,6 +8,10 @@ table Boutiques
 		formatString: 0
 		lineageTag: 07c18939-118e-465a-84a0-9dd021eaaa78
 
+	measure 'NB vente' = count(Sales[IdVente])
+		formatString: 0
+		lineageTag: 4fd9e995-4bdc-4986-893a-cd3f40ba5721
+
 	column IdBoutique
 		dataType: string
 		lineageTag: 89f8e428-03a5-489b-b254-592469bc25c0
