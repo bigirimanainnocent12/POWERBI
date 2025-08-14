@@ -1,6 +1,13 @@
 table Boutiques
 	lineageTag: 2869e9a2-dc35-4e86-987b-bf87f59cb4d6
 
+	measure Paysselectionne = SELECTEDVALUE(Geographie[Pays],"Pays")
+		lineageTag: c9b7bb42-cf5b-4eb5-8093-ed3b545b468b
+
+	measure 'Nb Boutique' = COUNT(Boutiques[IdBoutique])
+		formatString: 0
+		lineageTag: 07c18939-118e-465a-84a0-9dd021eaaa78
+
 	column IdBoutique
 		dataType: string
 		lineageTag: 89f8e428-03a5-489b-b254-592469bc25c0

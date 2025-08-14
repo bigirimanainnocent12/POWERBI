@@ -12,6 +12,7 @@ table Geographie
 	column Continent
 		dataType: string
 		lineageTag: 6f073549-bbd1-4180-81ec-1771a1a1eb4e
+		dataCategory: Continent
 		summarizeBy: none
 		sourceColumn: Continent
 
@@ -28,6 +29,7 @@ table Geographie
 	column Pays
 		dataType: string
 		lineageTag: 12f90d0c-9174-4841-af8e-64ce372fd0da
+		dataCategory: Place
 		summarizeBy: none
 		sourceColumn: Pays
 

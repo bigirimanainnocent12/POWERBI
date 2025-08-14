@@ -28,11 +28,11 @@ expression 'Transformer l''exemple de fichier' =
 
 expression 'Transformer le fichier' =
 		let
-		    Source = (Paramètre1) => let
-		        Source = Csv.Document(Paramètre1,[Delimiter=",", Columns=14, Encoding=65001, QuoteStyle=QuoteStyle.None]),
-		        #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
-		    in
-		        #"En-têtes promus"
+		    Source = (Paramètre1 as binary) => let
+		    Source = Csv.Document(Paramètre1,[Delimiter=",", Columns=14, Encoding=65001, QuoteStyle=QuoteStyle.None]),
+		    #"En-têtes promus" = Table.PromoteHeaders(Source, [PromoteAllScalars=true])
+		in
+		    #"En-têtes promus"
 		in
 		    Source
 	mAttributes: [ FunctionQueryBinding = "{""exemplarFormulaName"":""Transformer l\u0027exemple de fichier""}" ]

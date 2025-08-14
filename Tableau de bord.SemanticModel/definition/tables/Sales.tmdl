@@ -3,7 +3,7 @@ table Sales
 
 	column IdDate
 		dataType: dateTime
-		formatString: General Date
+		formatString: Long Date
 		lineageTag: 2aba3735-cb63-43fa-a3c5-c88249e1f752
 		summarizeBy: none
 		sourceColumn: IdDate
@@ -13,7 +13,11 @@ table Sales
 			relationship: 2a55eae8-8f51-4b7f-bb85-4f5d5b2675ae
 			defaultHierarchy: LocalDateTable_ef1df1d5-8d3e-48d7-a662-0db8c3cd7637.'Hiérarchie de dates'
 
+		changedProperty = DataType
+
 		annotation SummarizationSetBy = Automatic
+
+		annotation UnderlyingDateTimeDataType = Date
 
 	column IdVente
 		dataType: string
@@ -56,6 +60,39 @@ table Sales
 		sourceColumn: Quantité de vente
 
 		annotation SummarizationSetBy = Automatic
+
+	column 'Montant vente' = (Sales[Quantité de vente]-Sales[Quantité de retour])* RELATED(Produits[Coût unitaire])
+		formatString: #,0.00\ "€";-#,0.00\ "€";#,0.00\ "€"
+		lineageTag: b246614a-4c28-4b04-8ef4-6fe193f6396b
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
+
+	column Remise = ```
+			SWITCH(
+			    TRUE(),
+			    Sales[Montant vente] < 2000, 0,
+			    Sales[Montant vente] < 5000, 0.05,
+			    Sales[Montant vente] >= 5000,0.1
+			)
+			
+			```
+		formatString: 0.00\ %;-0.00\ %;0.00\ %
+		lineageTag: 6112314f-381a-4289-bb82-f43c7f0e41c2
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+	column 'Montant ventre apres remise' = (1-Sales[Remise])*Sales[Montant vente]
+		formatString: #,0.###############\ "€";-#,0.###############\ "€";#,0.###############\ "€"
+		lineageTag: 981190b7-feb5-452d-99e2-21fb1b71bc49
+		summarizeBy: sum
+
+		annotation SummarizationSetBy = Automatic
+
+		annotation PBI_FormatHint = {"currencyCulture":"fr-FR"}
 
 	partition Sales = m
 		mode: import
