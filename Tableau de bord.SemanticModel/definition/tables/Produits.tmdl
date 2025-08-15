@@ -1,6 +1,10 @@
 table Produits
 	lineageTag: 8e9b1233-55f1-4e93-9966-8e5142d8a350
 
+	measure 'NB PRODUIT' = COUNT(Produits[IdProduit])
+		formatString: 0
+		lineageTag: 60d74f57-3258-4081-b1fe-020a38c5d955
+
 	column Marque
 		dataType: string
 		lineageTag: c2e804dd-1847-41cd-b058-3554e87a32a6
